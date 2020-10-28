@@ -41,7 +41,10 @@ template <typename T>
 class BubbleSorter : public ISorter<T>
 {
 public:
-
+	BubbleSorter(int(*cmp)(T, T))
+	{
+		this->cmp = cmp;
+	}
 	virtual Sequence<T>* Sort(Sequence<T>* input) override
 	{
 		//

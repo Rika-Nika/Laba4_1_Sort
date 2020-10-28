@@ -1264,12 +1264,12 @@ void testSortBubble()
 		Sequence<int>* seq = new ArraySequence <int>(testArr, SIZE);
 		int a = 1;
 		int b = 2;
-		//ISorter<int>* descSort = new BubbleSorter<int>();
-		ISorter<int>* descSort2 = new BubbleSorter<int>([](int a, int b)-> int
+		ISorter<int>* descSort = new BubbleSorter<int>(ascComp);
+	/*	ISorter<int>* descSort2 = new BubbleSorter<int>([](int a, int b)-> int
 		{
 				return 1;
-		});
-		Sequence<int>* seq2 = descSort2->Sort(seq);
+		});*/
+		Sequence<int>* seq2 = descSort->Sort(seq);
 		for (int i = 0; i < SIZE; i++) {
 			res = res && (seq->Get(i) == testArr[i]);
 		}

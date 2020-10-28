@@ -10,9 +10,7 @@
 #include "Queue.hpp"
 //#include "QueueArray.hpp"
 #include "QueueLinkedList.hpp"
-
-
-
+#include "Sorter.hpp"
 void testDinArrGet() {
 	const int SIZE = 5;
 	bool res = true;
@@ -1235,12 +1233,73 @@ void testQueue() {
 	std::cout << "________________ End testing testQueue _________________\n";
 }
 
+int dscComp(int a, int b)
+{
+	if (a < b)
+		return -1;
+	if (a > b)
+		return 1;
+	return 0;
+}
+
+int ascComp(int a, int b)
+{
+	if (a > b)
+		return -1;
+	if (a < b)
+		return 1;
+	return 0;
+}
+
+
+
+void testSortBubble()
+{
+	std::cout << "________________ Start testing testSortBubble _______________\n";
+
+	const int SIZE = 5;
+	bool res = true;
+	int testArr[SIZE] = { 345, 112, 23, 153, 122222 };
+	try {
+		Sequence<int>* seq = new ArraySequence <int>(testArr, SIZE);
+		int a = 1;
+		int b = 2;
+		//ISorter<int>* descSort = new BubbleSorter<int>();
+		ISorter<int>* descSort2 = new BubbleSorter<int>([](int a, int b)-> int
+		{
+				return 1;
+		});
+		Sequence<int>* seq2 = descSort2->Sort(seq);
+		for (int i = 0; i < SIZE; i++) {
+			res = res && (seq->Get(i) == testArr[i]);
+		}
+		if (res) {
+			std::cout << "testArraySequenceCreateCopy passed\n";
+		}
+		else {
+			std::cout << "testArraySequenceCreateCopy FAILED\n";
+		}
+	}
+	catch (Exception& exception) {
+		std::cout << "testArraySequenceCreateCopy FAILED\nException: " << exception.what() << "\n";
+	}
+	std::cout << "________________ End testing testSortBubble _________________\n";
+}
+
+void testSort()
+{
+	std::cout << "________________ Start testing testSort _______________\n";
+	testSortBubble();
+	std::cout << "________________ End testing testSort _______________\n";
+}
+
 int main() {
 	testDinArr();
 	testLinkedList();
 	testArraySequence();
 	testLinkedListSequence();
 	testQueue();
+	testSort();
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
